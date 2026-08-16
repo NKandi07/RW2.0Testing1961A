@@ -1,5 +1,6 @@
 #include "robot-config.h"
 #include "vex.h"
+#include "motor-control.h"
 
 void dsrBack(double targetDistance_mm, int timeoutMs, double leniency = 5.0) {
     const double maxVolt = 5.0;

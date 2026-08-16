@@ -33,6 +33,8 @@ extern distance front_sensor;
 extern distance left_sensor;
 extern distance right_sensor;
 extern distance back_sensor;
+extern distance back_left;
+extern distance back_right;
 
 // ── Subsystem devices ─────────────────────────────────────────────────────
 // Add your game-specific mechanisms here, e.g.:
