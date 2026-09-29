@@ -60,18 +60,18 @@ distance back_sensor = distance(PORT15);
 double distance_between_wheels = 9.75;
 
 // motor to wheel gear ratio * wheel diameter (in inches) * pi
-double wheel_distance_in = (36.0 / 60.0) * 3.05 * M_PI;
+double wheel_distance_in = (36.0 / 60.0) * 3.125 * M_PI;
 
 // PID Constants for movement
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
 // NOTE: these are placeholder values — run the auto-tuner or hand-tune before use.
-double distance_kp = 1.4, distance_ki = 0.002, distance_kd = 0.25;
+double distance_kp = 1.1, distance_ki = 0.15, distance_kd = 0.25;
 // distance works best at 8 Volts of Output Power, much more smooth for autons.
 double turn_kp = 0.0785, turn_ki = 0.00, turn_kd = 0.03;
 // turn also works best at 8 Volts of Output Power, much more smooth for autons.
-double heading_correction_kp = 0.2, heading_correction_ki = 0, heading_correction_kd = 0;
+double heading_correction_kp = 3, heading_correction_ki = 0, heading_correction_kd = 0.1;
 
 // Enable or disable the use of tracking wheels
 bool using_horizontal_tracker = true;

@@ -253,7 +253,7 @@ void auton() {
 
   // Write your autonomous routine here.
   // turnToAngle(90, 3000, true, 8);
-  driveTo(10, 3000, true, 8);
+  driveTo(30, 5000, true, 10);
 
 }
 
