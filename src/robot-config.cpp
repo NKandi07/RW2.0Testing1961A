@@ -15,30 +15,30 @@ controller controller_1 = controller(primary);
 // gearSetting: ratio36_1 (red), ratio18_1 (green), ratio6_1 (blue/5.5w)
 // Reverse motors as needed so that positive voltage spins the wheel forward.
 // ============================================================================
-motor left_chassis1  = motor(PORT1, ratio6_1, true);
-motor left_chassis2  = motor(PORT2, ratio6_1, true);
+motor left_chassis1  = motor(PORT13, ratio6_1, true);
+motor left_chassis2  = motor(PORT20, ratio6_1, true);
 motor_group left_chassis = motor_group(left_chassis1, left_chassis2);
 
-motor right_chassis1 = motor(PORT3, ratio6_1, false);
-motor right_chassis2 = motor(PORT4, ratio6_1, false);
+motor right_chassis1 = motor(PORT11, ratio6_1, false);
+motor right_chassis2 = motor(PORT19, ratio6_1, false);
 motor_group right_chassis = motor_group(right_chassis1, right_chassis2);
 
 // drivetrain(left, right, wheelTravel_in, trackWidth_in, wheelbase_in, units)
-drivetrain Drivetrain = drivetrain(left_chassis, right_chassis, 3.17, 6.57, 1.5, inches);
+drivetrain Drivetrain = drivetrain(left_chassis, right_chassis, 10.21, 9.75, 8, inches);
 
-inertial inertial_sensor = inertial(PORT9);
+inertial inertial_sensor = inertial(PORT3);
 
 // ── Tracking wheels ──────────────────────────────────────────────────────
 // Format: rotation(port, reversed)
 // Set to any unused port if you don't use tracking wheels.
-rotation horizontal_tracker = rotation(PORT10, true);
+rotation horizontal_tracker = rotation(PORT2, false);
 rotation vertical_tracker   = rotation(PORT16, true);
 
 // ── Distance sensors ──────────────────────────────────────────
-distance front_sensor = distance(PORT13);
+distance front_sensor = distance(PORT12);
 distance left_sensor = distance(PORT9);
-distance right_sensor = distance(PORT11);
-distance back_sensor = distance(PORT20);
+distance right_sensor = distance(PORT14);
+distance back_sensor = distance(PORT15);
 
 // ============================================================================
 // SUBSYSTEM DEVICES
@@ -57,22 +57,24 @@ distance back_sensor = distance(PORT20);
 // ============================================================================
 
 // Distance between the middles of the left and right wheels of the drive (in inches)
-double distance_between_wheels = 11.2;
+double distance_between_wheels = 9.75;
 
 // motor to wheel gear ratio * wheel diameter (in inches) * pi
-double wheel_distance_in = (48.0 / 72.0) * 3.1 * M_PI;
+double wheel_distance_in = (36.0 / 60.0) * 3.05 * M_PI;
 
 // PID Constants for movement
 // distance_* : Linear PID for straight driving
 // turn_*     : PID for turning in place
 // heading_correction_* : PID for heading correction during linear movement
 // NOTE: these are placeholder values — run the auto-tuner or hand-tune before use.
-double distance_kp = 0, distance_ki = 0, distance_kd = 0;
-double turn_kp = 0, turn_ki = 0, turn_kd = 0;
-double heading_correction_kp = 0, heading_correction_ki = 0, heading_correction_kd = 0;
+double distance_kp = 1.4, distance_ki = 0.002, distance_kd = 0.25;
+// distance works best at 8 Volts of Output Power, much more smooth for autons.
+double turn_kp = 0.0785, turn_ki = 0.00, turn_kd = 0.03;
+// turn also works best at 8 Volts of Output Power, much more smooth for autons.
+double heading_correction_kp = 0.2, heading_correction_ki = 0, heading_correction_kd = 0;
 
 // Enable or disable the use of tracking wheels
-bool using_horizontal_tracker = false;
+bool using_horizontal_tracker = true;
 bool using_vertical_tracker = false;
 
 // IGNORE THESE IF YOU ARE NOT USING TRACKING WHEELS
@@ -81,7 +83,7 @@ bool using_vertical_tracker = false;
 double horizontal_tracker_dist_from_center = 0;
 // Horizontal distance from bot center to vertical tracking wheel (in, + = right of center)
 double vertical_tracker_dist_from_center = 0;
-double horizontal_tracker_diameter = 2.75; // in
+double horizontal_tracker_diameter = 2; // in
 double vertical_tracker_diameter = 2;      // in
 
 // ── Distance sensor position-reset offsets (only needed if used) ────────
@@ -134,7 +136,7 @@ bool RemoteControlCodeEnabled = true;
 //   TANK         — Axis3 left side, Axis2 right side
 //   ARCADE       — Axis3 forward, Axis4 turn (both on left stick)
 //   SPLIT_ARCADE — Axis3 forward, Axis1 turn (left stick fwd, right stick turn)
-DriveScheme drive_scheme = TANK;
+DriveScheme drive_scheme = SPLIT_ARCADE;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

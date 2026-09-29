@@ -53,7 +53,7 @@ void initializeRandomSeed() {
 void drawWatermark() {
   Brain.Screen.setFont(monoXXL);
   Brain.Screen.setPenColor(white);
-  Brain.Screen.printAt(330, 230, "RW V2"); // bottom-right corner (480x272 screen)
+  Brain.Screen.printAt(330, 230, "RW V3"); // bottom-right corner (480x272 screen)
   Brain.Screen.setFont(mono15);            // reset font for other prints
 }
 
@@ -252,6 +252,9 @@ void auton() {
   // task armTask(armPIDLoop);
 
   // Write your autonomous routine here.
+  // turnToAngle(90, 3000, true, 8);
+  driveTo(10, 3000, true, 8);
+
 }
 
 int main() {
